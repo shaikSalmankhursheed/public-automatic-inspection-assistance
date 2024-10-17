@@ -1,0 +1,28 @@
+description: Ultralytics best model trained on config-colab.yaml
+author: Ultralytics
+date: '2024-09-14T18:51:19.136992'
+version: 8.2.2
+license: AGPL-3.0 License (https://ultralytics.com/license)
+docs: https://docs.ultralytics.com
+stride: 32
+task: detect
+batch: 1
+imgsz:
+- 640
+- 640
+names:
+  0: back_glass
+  1: back_left_side_light
+  2: back_right_side_light
+  3: door
+  4: front_bumper
+  5: front_glass
+  6: front_left_side_door
+  7: front_left_side_light
+  8: front_left_side_mirror
+  9: front_right_side_door
+  10: front_right_side_light
+  11: front_right_side_mirror
+  12: hood
+  13: rear_bumper
+  14: wheel

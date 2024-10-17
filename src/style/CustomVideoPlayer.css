@@ -1,0 +1,84 @@
+/* Container for video overlay */
+.video-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  max-width: 720px;
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* padding: 10px; */
+  z-index: 10;
+  transition: opacity 0.3s ease; /* Smooth transition for hiding/showing */
+  
+}
+
+.custom-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+}
+
+.control-btn {
+  background-color: rgba(255, 255, 255, 0.2); /* Light transparent background */
+  color: #fff;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.control-btn:hover {
+  background-color: rgba(255, 255, 255, 0.5); /* Button hover effect */
+}
+
+.volume-bar,
+.seek-bar {
+  -webkit-appearance: none;
+  width: 100px;
+  height: 5px;
+  background: #444; /* Track background */
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.volume-bar::-webkit-slider-thumb,
+.seek-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.volume-bar:hover,
+.seek-bar:hover {
+  background: #666; /* Hover effect for slider */
+}
+
+.time-display {
+  color: #fff;
+  font-size: 14px;
+  margin-left: 10px;
+  font-family: 'Roboto', sans-serif;
+}
+
+@media (max-width: 768px) {
+  .custom-controls {
+    flex-wrap: wrap; /* Make controls wrap on smaller screens */
+  }
+  .control-btn {
+    font-size: 14px;
+    padding: 8px;
+  }
+  .volume-bar,
+  .seek-bar {
+    width: 80px;
+  }
+}

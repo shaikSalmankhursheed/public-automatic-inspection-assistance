@@ -1,0 +1,14 @@
+description: Ultralytics YOLOv8n-seg model trained on C:/Vijay/Python/Car-Damage-detection-1/data.yaml
+author: Ultralytics
+date: '2024-10-03T06:09:23.330813'
+version: 8.2.98
+license: AGPL-3.0 License (https://ultralytics.com/license)
+docs: https://docs.ultralytics.com
+stride: 32
+task: segment
+batch: 1
+imgsz:
+- 640
+- 640
+names:
+  0: Car-Damage
