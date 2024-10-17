@@ -80,12 +80,18 @@ const App = () => {
   return (
     <div className="App">
       {loading.loading && (
-        <Loader>Loading model... {(loading.progress * 100).toFixed(2)}%</Loader>
+        <Loader>Loading... {(loading.progress * 100).toFixed(2)}%</Loader>
       )}
-      <div style={{ display: "flex", flexDirection: "row"}}>
-        <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           <div className="header">
-            <h1>Automatic Inspection Assistance</h1>
+            <h1>Automatic Smart Vehicle Inspection Assistance</h1>
           </div>
 
           <div className="content">
@@ -172,12 +178,29 @@ const App = () => {
             setDetections={setDetections}
           />
         </div>
-        <div style={{ display: "flex", flexDirection: "column" , padding:"20px"}}>
+        <div
+          style={{ display: "flex", flexDirection: "column", padding: "20px" }}
+        >
           {detections.map((detection) => {
             return (
-              <div style={{ display: "flex", flexDirection: "row", cursor:'pointer', padding:'12px' }} onClick={()=>{videoRef.current.currentTime=detection.timeStamp}}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  cursor: "pointer",
+                  padding: "12px",
+                }}
+                onClick={() => {
+                  videoRef.current.currentTime = detection.timeStamp;
+                }}
+              >
                 <div className="snap">
-                  <img src={detection.img} alt="snapshot" width={100} height={100}></img>
+                  <img
+                    src={detection.img}
+                    alt="snapshot"
+                    width={100}
+                    height={100}
+                  ></img>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <div>{detection.timeStamp} sec</div>
