@@ -152,6 +152,7 @@ export const InitialPage = () => {
       setVideoEnded(true);
       // setResponse(responseBody);
     } catch (error) {
+      setVideoEnded(true);
       console.error("Error invoking Bedrock model:", error);
       // setResponse("Error occurred while processing your request.");
     }
