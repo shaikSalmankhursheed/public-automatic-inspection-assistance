@@ -1,11 +1,12 @@
 .App {
-  height: 100%;
+  min-height: 100%;
   padding: 0 10px;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: auto;
 }
 
 .App>* {

@@ -1,0 +1,25 @@
+.parent-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 2.5rem;
+}
+
+.left-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.left-section-text {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+    font-weight: 400;
+    text-align: right;
+
+}
+
+.right-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}

@@ -6,6 +6,8 @@ import ButtonHandler from "./components/btn-handler";
 import { detectFrame, detectVideo } from "./utils/detect";
 import "./style/App.css";
 import CustomVideoPlayer from "./components/CustomVideoPlayer";
+import NewLoader from "./components/newLoader";
+import VehicleConditionItem from "./components/vehicle-condition-item/vehicle-condition-item";
 
 const App = () => {
   const [loading, setLoading] = useState({ loading: true, progress: 0 }); // loading state
@@ -77,10 +79,21 @@ const App = () => {
   // useEffect(()=>{
   //   console.log(detections);
   // },[detections])
+
+  const getPositions = (partsObject) => {
+    let result = "";
+    partsObject?.map((part) => {
+      result += part.replaceAll("_", " ") + ",";
+    });
+
+    return result;
+  };
   return (
     <div className="App">
       {loading.loading && (
-        <Loader>Loading... {(loading.progress * 100).toFixed(2)}%</Loader>
+        <NewLoader />
+
+        //  <Loader>Loading... {(loading.progress * 100).toFixed(2)}%</Loader>
       )}
       <div style={{ display: "flex", flexDirection: "row" }}>
         <div
@@ -94,125 +107,128 @@ const App = () => {
             <h1>Automatic Smart Vehicle Inspection Assistance</h1>
           </div>
 
-          <div className="content">
-            <img
-              src="#"
-              ref={imageRef}
-              onLoad={() =>
-                detectFrame(
-                  imageRef.current,
-                  model,
-                  canvasRef.current,
-                  captureRef.current,
-                  partsModel,
-                  detections,
-                  setDetections
-                )
-              }
-            />
-            <video
-              autoPlay
-              muted
-              ref={cameraRef}
-              onPlay={() =>
-                detectVideo(
-                  cameraRef.current,
-                  model,
-                  canvasRef.current,
-                  captureRef.current,
-                  partsModel,
-                  detections,
-                  setDetections
-                )
-              }
-              // controls
-            />
-            <video
-              autoPlay
-              muted
-              ref={videoRef}
-              onPlay={() => {
-                detectVideo(
-                  videoRef.current,
-                  model,
-                  canvasRef.current,
-                  captureRef.current,
-                  partsModel,
-                  detections,
-                  setDetections
-                );
-              }}
-              onSeeked={() =>
-                detectFrame(
-                  videoRef.current,
-                  model,
-                  canvasRef.current,
-                  captureRef.current,
-                  partsModel,
-                  detections,
-                  setDetections
-                )
-              }
-              // onPlay={()=> detectVideo(videoRef.current,model,canvasRef.current, partsModel)}
-              // onPause={()=>{setPaused(true);detectFrame(videoRef.current,model,canvasRef.current,partsModel)}}
-            />
-            <CustomVideoPlayer videoRef={videoRef}></CustomVideoPlayer>
-            <canvas
-              width={model.inputShape[1]}
-              height={model.inputShape[2]}
-              ref={canvasRef}
-            />
-            <canvas
-              style={{ display: "none" }}
-              width={model.inputShape[1]}
-              height={model.inputShape[2]}
-              ref={captureRef}
-            ></canvas>
-          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "1rem",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <div className="content" style={{ marginY: "5rem" }}>
+              <img
+                src="#"
+                ref={imageRef}
+                onLoad={() =>
+                  detectFrame(
+                    imageRef.current,
+                    model,
+                    canvasRef.current,
+                    captureRef.current,
+                    partsModel,
+                    detections,
+                    setDetections
+                  )
+                }
+              />
+              <video
+                autoPlay
+                muted
+                ref={cameraRef}
+                onPlay={() =>
+                  detectVideo(
+                    cameraRef.current,
+                    model,
+                    canvasRef.current,
+                    captureRef.current,
+                    partsModel,
+                    detections,
+                    setDetections
+                  )
+                }
+                // controls
+              />
+              <video
+                autoPlay
+                muted
+                ref={videoRef}
+                onPlay={() => {
+                  detectVideo(
+                    videoRef.current,
+                    model,
+                    canvasRef.current,
+                    captureRef.current,
+                    partsModel,
+                    detections,
+                    setDetections
+                  );
+                }}
+                onSeeked={() =>
+                  detectFrame(
+                    videoRef.current,
+                    model,
+                    canvasRef.current,
+                    captureRef.current,
+                    partsModel,
+                    detections,
+                    setDetections
+                  )
+                }
+                // onPlay={()=> detectVideo(videoRef.current,model,canvasRef.current, partsModel)}
+                // onPause={()=>{setPaused(true);detectFrame(videoRef.current,model,canvasRef.current,partsModel)}}
+              />
+              <CustomVideoPlayer videoRef={videoRef}></CustomVideoPlayer>
+              <canvas
+                width={model.inputShape[1]}
+                height={model.inputShape[2]}
+                ref={canvasRef}
+              />
+              <canvas
+                style={{ display: "none" }}
+                width={model.inputShape[1]}
+                height={model.inputShape[2]}
+                ref={captureRef}
+              ></canvas>
+            </div>
 
-          <ButtonHandler
-            imageRef={imageRef}
-            cameraRef={cameraRef}
-            videoRef={videoRef}
-            canvasRef={canvasRef.current}
-            setDetections={setDetections}
-          />
-        </div>
-        <div
-          style={{ display: "flex", flexDirection: "column", padding: "20px" }}
-        >
-          {detections.map((detection) => {
-            return (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  cursor: "pointer",
-                  padding: "12px",
-                }}
-                onClick={() => {
-                  videoRef.current.currentTime = detection.timeStamp;
-                }}
-              >
-                <div className="snap">
-                  <img
-                    src={detection.img}
-                    alt="snapshot"
-                    width={100}
-                    height={100}
-                  ></img>
+            <ButtonHandler
+              imageRef={imageRef}
+              cameraRef={cameraRef}
+              videoRef={videoRef}
+              canvasRef={canvasRef.current}
+              setDetections={setDetections}
+            />
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              padding: "20px",
+              gap: "2rem",
+              overflowY: "auto",
+            }}
+          >
+            {detections?.map((detection) => {
+              return (
+                <div
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    videoRef.current.currentTime = detection.timeStamp;
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                >
+                  <VehicleConditionItem
+                    imageUrl={detection.img}
+                    timeStamps={detection.timeStamp}
+                    severity="Low"
+                    position={getPositions(detection.parts)}
+                    isAddToRepairOrder={false}
+                  />
                 </div>
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <div>{detection.timeStamp} sec</div>
-                  <div style={{ display: "flex", flexDirection: "row" }}>
-                    {detection.parts.map((part) => {
-                      return <p>{part},</p>;
-                    })}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
