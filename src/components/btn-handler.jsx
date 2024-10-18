@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { Webcam } from "../utils/webcam";
 
-const ButtonHandler = ({ imageRef, cameraRef, videoRef, canvasRef, setDetections }) => {
+const ButtonHandler = ({ imageRef, cameraRef, videoRef, canvasRef, setDetections, setVideoEnded }) => {
   const [streaming, setStreaming] = useState(null); // streaming state
   const inputImageRef = useRef(null); // video input reference
   const inputVideoRef = useRef(null); // video input reference
@@ -30,7 +30,8 @@ const ButtonHandler = ({ imageRef, cameraRef, videoRef, canvasRef, setDetections
     setStreaming(null); // set streaming to null
     inputVideoRef.current.value = ""; // reset input video
     videoRef.current.style.display = "none"; // hide video
-    setDetections([])
+    setDetections([]);
+    setVideoEnded(false);
 
   };
 

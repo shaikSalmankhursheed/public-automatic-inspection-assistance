@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 
 const VehicleConditionItem = ({
   imageUrl = "https://gts.ai/wp-content/uploads/2024/05/Damaged-car-gts-10.webp",
-  Title = "Scratch",
+  Title = "Damage",
   position = "Left front bumper",
   price = "10.00",
   priceExcludingVat = "8.00",
@@ -59,7 +59,8 @@ const VehicleConditionItem = ({
           }}
         >
           <div style={{}}>Severity:</div>
-          <div>{calculateSeverity()}</div>
+          {/* <div>{calculateSeverity()}</div> */}
+          <div>{severity}</div>
         </div>
         <div
           style={{

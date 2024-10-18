@@ -25,19 +25,25 @@
     "url": "https://github.com/Hyuto/yolov8-seg-tfjs/issues"
   },
   "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "^3.670.0",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
-    "@mui/icons-material": "^6.1.4",
-    "@mui/material": "^6.1.4",
+    "@mui/icons-material": "5.15.15",
+    "@mui/material": "5.15.15",
+    "@mui/system": "5.15.15",
     "@tensorflow/tfjs": "^4.2.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-router": "6.16.0",
+    "react-router-dom": "6.16.0",
+    "react-dom": "^18.2.0",
+    "react-intl": "6.6.4"
   },
   "devDependencies": {
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
     "@vitejs/plugin-react": "^2.2.0",
     "gh-pages": "^5.0.0",
+    "typescript": "5.4.4",
     "vite": "^3.2.3"
   }
 }
