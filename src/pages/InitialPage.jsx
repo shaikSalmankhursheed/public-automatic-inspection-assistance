@@ -115,8 +115,8 @@ export const InitialPage = () => {
     const client = new BedrockRuntimeClient({
       region: "us-west-2",
       credentials: {
-        accessKeyId: "AKIAZNLLKPDDW6Q3UUAA",
-        secretAccessKey: "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",
+        accessKeyId: import.meta.env.VITE_accessKeyId,
+        secretAccessKey: import.meta.env.VITE_secretAccessKey,
       },
     });
 
@@ -142,8 +142,8 @@ export const InitialPage = () => {
       const data = await client.send(command);
       const responseBody = JSON.parse(new TextDecoder().decode(data.body));
       console.log("responseBody", JSON.parse(responseBody.content[0].text));
-      const d = JSON.parse(responseBody.content[0].text)
-      const awsAnalysed = []
+      const d = JSON.parse(responseBody.content[0].text);
+      const awsAnalysed = [];
       d.map((item, index) => {
         awsAnalysed.push({ ...detections[index], ...item });
       });
@@ -224,7 +224,7 @@ export const InitialPage = () => {
                     setDetections
                   )
                 }
-              // controls
+                // controls
               />
               <video
                 autoPlay
@@ -252,9 +252,11 @@ export const InitialPage = () => {
                     setDetections
                   )
                 }
-                onEnded={() => { handleSubmit() }}
-              // onPlay={()=> detectVideo(videoRef.current,model,canvasRef.current, partsModel)}
-              // onPause={()=>{setPaused(true);detectFrame(videoRef.current,model,canvasRef.current,partsModel)}}
+                onEnded={() => {
+                  handleSubmit();
+                }}
+                // onPlay={()=> detectVideo(videoRef.current,model,canvasRef.current, partsModel)}
+                // onPause={()=>{setPaused(true);detectFrame(videoRef.current,model,canvasRef.current,partsModel)}}
               />
               <CustomVideoPlayer videoRef={videoRef}></CustomVideoPlayer>
               <canvas
@@ -288,56 +290,56 @@ export const InitialPage = () => {
               overflowY: "auto",
             }}
           >
-            {videoEnded && (analysedDetections.length > 0 ? analysedDetections?.map((detection, ind) => {
-              // console.log(detection.Seviority);
-              if (ind < detections.length) {
-                return (
-                  <div
-                    style={{ cursor: "pointer" }}
-                    onClick={() => {
-                      videoRef.current.currentTime = detection.timeStamp;
-                      window.scrollTo({ top: 0, behavior: "smooth" });
-                    }}
-                  >
-                    <VehicleConditionItem
-                      imageUrl={detection.img}
-                      timeStamps={detection.timeStamp}
-                      severity={detection.Severity}
-                      position={getPositions(detection.parts)}
-                      isAddToRepairOrder={false}
-                      price={detection.EstimationCost}
-                    />
-                  </div>
-                );
-              }
-
-            }) : detections?.map((detection, ind) => {
-              // console.log(detection.Seviority);
-              if (ind < detections.length) {
-                return (
-                  <div
-                    style={{ cursor: "pointer" }}
-                    onClick={() => {
-                      videoRef.current.currentTime = detection.timeStamp;
-                      window.scrollTo({ top: 0, behavior: "smooth" });
-                    }}
-                  >
-                    <VehicleConditionItem
-                      imageUrl={detection.img}
-                      timeStamps={detection.timeStamp}
-                      position={getPositions(detection.parts)}
-                      isAddToRepairOrder={false}
-                    />
-                  </div>
-                );
-              }
-
-            }))}
-
+            {videoEnded &&
+              (analysedDetections.length > 0
+                ? analysedDetections?.map((detection, ind) => {
+                    // console.log(detection.Seviority);
+                    if (ind < detections.length) {
+                      return (
+                        <div
+                          style={{ cursor: "pointer" }}
+                          onClick={() => {
+                            videoRef.current.currentTime = detection.timeStamp;
+                            window.scrollTo({ top: 0, behavior: "smooth" });
+                          }}
+                        >
+                          <VehicleConditionItem
+                            imageUrl={detection.img}
+                            timeStamps={detection.timeStamp}
+                            severity={detection.Severity}
+                            position={getPositions(detection.parts)}
+                            isAddToRepairOrder={false}
+                            price={detection.EstimationCost}
+                          />
+                        </div>
+                      );
+                    }
+                  })
+                : detections?.map((detection, ind) => {
+                    // console.log(detection.Seviority);
+                    if (ind < detections.length) {
+                      return (
+                        <div
+                          style={{ cursor: "pointer" }}
+                          onClick={() => {
+                            videoRef.current.currentTime = detection.timeStamp;
+                            window.scrollTo({ top: 0, behavior: "smooth" });
+                          }}
+                        >
+                          <VehicleConditionItem
+                            imageUrl={detection.img}
+                            timeStamps={detection.timeStamp}
+                            position={getPositions(detection.parts)}
+                            isAddToRepairOrder={false}
+                          />
+                        </div>
+                      );
+                    }
+                  }))}
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 export default InitialPage;

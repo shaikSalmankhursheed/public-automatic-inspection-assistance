@@ -62,7 +62,7 @@ export const LandingPage = ({ setIsLandingPage }: LandingPageProps) => {
           <Container maxWidth="md">
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <Card onClick={handleVCR}>
+                <Card onClick={handleVCR} sx={{ cursor: "pointer" }}>
                   <CardContent>
                     <Stack direction={"column"} alignItems="center">
                       <NoteAltOutlinedIcon
@@ -76,7 +76,7 @@ export const LandingPage = ({ setIsLandingPage }: LandingPageProps) => {
                 </Card>
               </Grid>
               <Grid item xs={12}>
-                <Card>
+                <Card sx={{ cursor: "pointer" }}>
                   <CardContent>
                     <Stack direction={"column"} alignItems="center">
                       <FactCheckOutlinedIcon />
@@ -92,7 +92,7 @@ export const LandingPage = ({ setIsLandingPage }: LandingPageProps) => {
                 </Card>
               </Grid>
               <Grid item xs={12}>
-                <Card>
+                <Card sx={{ cursor: "pointer" }}>
                   <CardContent>
                     <Stack direction={"column"} alignItems="center">
                       <TripOriginOutlinedIcon
